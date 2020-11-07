@@ -6,7 +6,7 @@ export default class LandingPage extends Component {
     return (
       <div>
         <section>
-          <h1>Petful Adoptions</h1>
+          <h1>FIFO Petful Adoptions</h1>
         </section>
         <section>
           <Link to="/adopt">
