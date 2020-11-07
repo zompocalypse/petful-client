@@ -154,11 +154,11 @@ export default class AdoptMain extends Component {
   };
 
   render() {
-    const { dogs, cats, people, loggedInUser, error } = this.state;
+    const { dogs, cats, people, loggedInUser, error, loading } = this.state;
     let errorMessage;
     if (error) {
       errorMessage = <p className="error">There was an error</p>;
-    } else if (dogs.length === 0 || cats.length === 0) {
+    } else if ((dogs.length === 0 || cats.length === 0) && !loading) {
       return <div className="loading">No pets left to adopt!!!</div>;
     } else if (loggedInUser === people[0]) {
       clearInterval(this.timeout);
