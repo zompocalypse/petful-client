@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PetfulApiService from '../../services/petful-api-service';
 
+import './AdoptMain.css';
+
 export default class AdoptMain extends Component {
   state = {
     error: null,
@@ -116,7 +118,6 @@ export default class AdoptMain extends Component {
   };
 
   handleAdoption = (type) => {
-    console.log(type);
     PetfulApiService.removePetAndPerson(type).then((res) => {
       PetfulApiService.getPeople()
         .then((res) => {
@@ -165,7 +166,7 @@ export default class AdoptMain extends Component {
         <section className="pet-queue">
           <div className="adopt-dog">
             <img
-              className="pet-img"
+              className="adoption-pic"
               src={this.state.dogs[0].imageURL}
               alt={this.state.dogs[0].description}
             ></img>
@@ -199,7 +200,7 @@ export default class AdoptMain extends Component {
           </div>
         </section>
 
-        <section className="people-queue">
+        <section className="order">
           <h2>Queue of people to adopt a pet</h2>
           <div>{this.renderPeopleQueue()}</div>
         </section>

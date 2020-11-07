@@ -1,0 +1,30 @@
+.adopter {
+  display: flex;
+  flex: 3;
+  flex-direction: row;
+}
+
+.cats {
+  flex: 1;
+}
+
+.dogs {
+  flex: 1;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.queue {
+  flex: 1;
+  flex-direction: row;
+}
+
+.adoption-pic {
+  height: 30rem;
+  width: 28rem;
+  border: #18a837;
+  border-style: solid;
+  border-width: 2px;
+}
