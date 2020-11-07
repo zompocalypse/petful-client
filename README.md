@@ -1,10 +1,15 @@
-# Petful Server
+# FIFO Petful Adoptions
 
 FIFO Petful Adoptions is a First In First Out pet adoption service! That means every pet finds a home and both you and the pet don't have to wait long to be matched.
 
 Neat! How do I adopt?
 
 It's simple... Start by clicking the button below to go to the adoption page. Add you name to the list, wait your turn, then click to adopt a cat or a dog!
+
+## Repo Details
+
+- Client - https://github.com/zompocalypse/petful-client/tree/master
+- Server - https://github.com/zompocalypse/petful-server
 
 ## How to use the API
 
