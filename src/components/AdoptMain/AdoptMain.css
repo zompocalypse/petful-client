@@ -1,43 +1,80 @@
 .header > h1 {
-  font-size: 45px;
+  font-size: 42px;
   font-weight: 900;
   text-align: center;
 }
 
-h2 {
-  font-size: ;
+.queue {
+  flex: 1;
+  flex-direction: row;
+  text-align: center;
+  background-color: #e0e0e0;
+  padding: 10px 0;
+}
+
+.adoption-pic {
+  width: 100%;
+}
+
+.queue > h2 {
+  font-size: 24px;
+}
+
+.queue > div > h3,
+.queue > div > p {
+  font-size: 16px;
+  line-height: 10px;
 }
 
 .form {
   text-align: center;
 }
 
-.adopter {
+.button {
+  align-items: center;
+  margin-top: 25px;
+  background-color: #000080;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px 40px;
+}
+
+.button:hover {
+  background-color: #323299;
+  transition: 0.25s;
+}
+
+.pet-queue {
   display: flex;
-  flex: 3;
-  flex-direction: row;
+  flex-direction: column;
 }
 
-.cats {
+.adopt-cat,
+.adopt-dog {
   flex: 1;
+  text-align: center;
 }
 
-.dogs {
-  flex: 1;
+.adopt-dog > h2,
+.adopt-cat > h2 {
+  padding-bottom: 0;
+  margin-block-end: 0;
 }
 
-ul {
-  list-style-type: none;
+.age {
+  margin-block-start: 0.25em;
 }
 
-.queue {
-  flex: 1;
-  flex-direction: row;
-}
-
-.adoption-pic {
-  width: 100%;
-  border: #18a837;
-  border-style: solid;
-  border-width: 2px;
+@media screen and (min-width: 700px) {
+  .pet-queue {
+    display: flex;
+    flex-direction: row;
+  }
+  img {
+    width: inherit;
+    height: 400px;
+    overflow: hidden;
+  }
 }

@@ -38,7 +38,7 @@ export default class AdoptMain extends Component {
     let queueOfPeople = [];
     for (let i = 0; i < this.state.people.length; i++) {
       if (i === 0) {
-        queueOfPeople.push(<h3 key={i}>{this.state.people[i]}</h3>);
+        queueOfPeople.push(<h3 key={i}>~ {this.state.people[i]} ~</h3>);
       } else {
         queueOfPeople.push(<p key={i}>{this.state.people[i]}</p>);
       }
@@ -158,16 +158,16 @@ export default class AdoptMain extends Component {
       return <div className="loading">No pets left to adopt!!!</div>;
     } else if (loggedInUser === people[0]) {
       clearInterval(this.timeout);
-    } else if (people) {
+    } else if (loggedInUser === people[0]) {
       this.addMorePeopleToQueue();
     } else if (people.length > 5) {
-      clearInterval(this.addMorePeopleToQueue);
+      clearInterval(this.addNewPeopleTimer);
     }
 
     return (
       <div>
         <section className="header">
-          <h1>Adopt a pet!</h1>
+          <h1>Adopt a pet today!</h1>
           {errorMessage}
         </section>
         <section className="form">
@@ -186,8 +186,11 @@ export default class AdoptMain extends Component {
               required
             ></input>
             <br />
-            <button type="submit">Get in line</button>
+            <button className="button" type="submit">
+              Get in line
+            </button>
           </form>
+          <p>&#x2193;</p>
         </section>
         <section className="queue">
           <h2>The FIFO Queue</h2>
@@ -196,12 +199,12 @@ export default class AdoptMain extends Component {
         <section className="pet-queue">
           <div className="adopt-dog">
             <h2>Meet {this.state.dogs[0].name}</h2>
+            <p className="age">{this.state.dogs[0].age} years old</p>
             <img
               className="adoption-pic"
               src={this.state.dogs[0].imageURL}
               alt={this.state.dogs[0].description}
             ></img>
-            <p>{this.state.dogs[0].age} years old</p>
             <p>Gender: {this.state.dogs[0].gender}</p>
             <p>Breed: {this.state.dogs[0].breed}</p>
             <p>How I got here: {this.state.dogs[0].story}</p>
@@ -211,20 +214,23 @@ export default class AdoptMain extends Component {
               </button>
             )}
           </div>
-          <hr />
           <div className="adopt-cat">
             <h2>Meet {this.state.cats[0].name}!</h2>
+            <p className="age">{this.state.cats[0].age} years old</p>
             <img
-              className="pet-img"
+              className="adoption-pic"
               src={this.state.cats[0].imageURL}
               alt={this.state.cats[0].description}
             ></img>
-            <p>{this.state.cats[0].age} years old</p>
             <p>Gender: {this.state.cats[0].gender}</p>
             <p>Breed: {this.state.cats[0].breed}</p>
             <p>How I got here: {this.state.cats[0].story}</p>
             {this.state.loggedInUser === this.state.people[0] && (
-              <button type="button" onClick={(e) => this.handleAdoption('cat')}>
+              <button
+                className="button"
+                type="button"
+                onClick={(e) => this.handleAdoption('cat')}
+              >
                 Adopt!
               </button>
             )}
