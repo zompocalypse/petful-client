@@ -14,6 +14,7 @@
 
 .adoption-pic {
   width: 100%;
+  height: auto;
 }
 
 .queue > h2 {

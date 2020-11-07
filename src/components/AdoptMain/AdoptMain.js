@@ -11,10 +11,12 @@ export default class AdoptMain extends Component {
     people: [],
     loggedInUser: '',
     name: '',
+    loading: false,
   };
 
   componentDidMount() {
     this.setState({ error: null });
+    this.setState({ loading: true });
 
     PetfulApiService.getPeople()
       .then((res) => {
@@ -29,6 +31,7 @@ export default class AdoptMain extends Component {
         this.setState({
           dogs: res.dogs,
           cats: res.cats,
+          loading: false,
         });
       })
       .catch((res) => this.setState({ error: res.error }));
@@ -171,72 +174,81 @@ export default class AdoptMain extends Component {
           <h1>Adopt a pet today!</h1>
           {errorMessage}
         </section>
-        <section className="form">
-          <form
-            className="add-to-list"
-            onSubmit={(e) => this.handleAddToList(e)}
-          >
-            <label htmlFor="name">Enter your name to get in line!</label>
-            <br />
-            <input
-              type="text"
-              name="name"
-              id="name-input"
-              onChange={this.handleChange}
-              value={this.state.name}
-              required
-            ></input>
-            <br />
-            <button className="button" type="submit">
-              Get in line
-            </button>
-          </form>
-          <p>&#x2193;</p>
-        </section>
-        <section className="queue">
-          <h2>The FIFO Queue</h2>
-          <div>{this.renderPeopleQueue()}</div>
-        </section>
-        <section className="pet-queue">
-          <div className="adopt-dog">
-            <h2>Meet {this.state.dogs[0].name}</h2>
-            <p className="age">{this.state.dogs[0].age} years old</p>
-            <img
-              className="adoption-pic"
-              src={this.state.dogs[0].imageURL}
-              alt={this.state.dogs[0].description}
-            ></img>
-            <p>Gender: {this.state.dogs[0].gender}</p>
-            <p>Breed: {this.state.dogs[0].breed}</p>
-            <p>How I got here: {this.state.dogs[0].story}</p>
-            {this.state.loggedInUser === this.state.people[0] && (
-              <button type="button" onClick={(e) => this.handleAdoption('dog')}>
-                Adopt!
-              </button>
-            )}
-          </div>
-          <div className="adopt-cat">
-            <h2>Meet {this.state.cats[0].name}!</h2>
-            <p className="age">{this.state.cats[0].age} years old</p>
-            <img
-              className="adoption-pic"
-              src={this.state.cats[0].imageURL}
-              alt={this.state.cats[0].description}
-            ></img>
-            <p>Gender: {this.state.cats[0].gender}</p>
-            <p>Breed: {this.state.cats[0].breed}</p>
-            <p>How I got here: {this.state.cats[0].story}</p>
-            {this.state.loggedInUser === this.state.people[0] && (
-              <button
-                className="button"
-                type="button"
-                onClick={(e) => this.handleAdoption('cat')}
+        {this.state.loading ? (
+          <p>Loading the pets!!!</p>
+        ) : (
+          <>
+            <section className="form">
+              <form
+                className="add-to-list"
+                onSubmit={(e) => this.handleAddToList(e)}
               >
-                Adopt!
-              </button>
-            )}
-          </div>
-        </section>
+                <label htmlFor="name">Enter your name to get in line!</label>
+                <br />
+                <input
+                  type="text"
+                  name="name"
+                  id="name-input"
+                  onChange={this.handleChange}
+                  value={this.state.name}
+                  required
+                ></input>
+                <br />
+                <button className="button" type="submit">
+                  Get in line
+                </button>
+              </form>
+              <p>&#x2193;</p>
+            </section>
+            <section className="queue">
+              <h2>The FIFO Queue</h2>
+              <div>{this.renderPeopleQueue()}</div>
+            </section>
+            <section className="pet-queue">
+              <div className="adopt-dog">
+                <h2>Meet {this.state.dogs[0].name}</h2>
+                <p className="age">{this.state.dogs[0].age} years old</p>
+                <img
+                  className="adoption-pic"
+                  src={this.state.dogs[0].imageURL}
+                  alt={this.state.dogs[0].description}
+                ></img>
+                <p>Gender: {this.state.dogs[0].gender}</p>
+                <p>Breed: {this.state.dogs[0].breed}</p>
+                <p>How I got here: {this.state.dogs[0].story}</p>
+                {this.state.loggedInUser === this.state.people[0] && (
+                  <button
+                    type="button"
+                    onClick={(e) => this.handleAdoption('dog')}
+                  >
+                    Adopt!
+                  </button>
+                )}
+              </div>
+              <div className="adopt-cat">
+                <h2>Meet {this.state.cats[0].name}!</h2>
+                <p className="age">{this.state.cats[0].age} years old</p>
+                <img
+                  className="adoption-pic"
+                  src={this.state.cats[0].imageURL}
+                  alt={this.state.cats[0].description}
+                ></img>
+                <p>Gender: {this.state.cats[0].gender}</p>
+                <p>Breed: {this.state.cats[0].breed}</p>
+                <p>How I got here: {this.state.cats[0].story}</p>
+                {this.state.loggedInUser === this.state.people[0] && (
+                  <button
+                    className="button"
+                    type="button"
+                    onClick={(e) => this.handleAdoption('cat')}
+                  >
+                    Adopt!
+                  </button>
+                )}
+              </div>
+            </section>
+          </>
+        )}
       </div>
     );
   }
