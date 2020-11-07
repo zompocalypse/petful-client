@@ -106,6 +106,7 @@ export default class AdoptMain extends Component {
         'Treena Lahey',
         'Sam Losco',
         'J-Roc',
+        'Test Person',
       ];
 
       const randomPerson =
