@@ -93,7 +93,11 @@ export default class AdoptMain extends Component {
   };
 
   addMorePeopleToQueue = () => {
-    this.addNewPeopleTimer = setInterval(() => {
+    let addNewPeopleTimer = setTimeout(() => {
+      if (this.state.people === 5) {
+        clearTimeout(addNewPeopleTimer);
+      }
+
       const randomPeople = [
         'Julian',
         'Ricky LaFleur',
@@ -103,9 +107,11 @@ export default class AdoptMain extends Component {
         'Sam Losco',
         'J-Roc',
       ];
+
       const randomPerson =
         randomPeople[Math.floor(Math.random() * randomPeople.length)];
-      if (this.state.people.length <= 5) {
+
+      if (this.state.people.length < 5) {
         PetfulApiService.addPerson(randomPerson)
           .then((res) => {
             this.setState({
@@ -152,8 +158,10 @@ export default class AdoptMain extends Component {
       return <div className="loading">No pets left to adopt!!!</div>;
     } else if (loggedInUser === people[0]) {
       clearInterval(this.timeout);
+    } else if (people) {
+      this.addMorePeopleToQueue();
     } else if (people.length > 5) {
-      clearInterval(this.addNewPeopleTimer);
+      clearInterval(this.addMorePeopleToQueue);
     }
 
     return (
@@ -162,15 +170,37 @@ export default class AdoptMain extends Component {
           <h1>Adopt a pet!</h1>
           {errorMessage}
         </section>
-
+        <section className="form">
+          <form
+            className="add-to-list"
+            onSubmit={(e) => this.handleAddToList(e)}
+          >
+            <label htmlFor="name">Enter your name to get in line!</label>
+            <br />
+            <input
+              type="text"
+              name="name"
+              id="name-input"
+              onChange={this.handleChange}
+              value={this.state.name}
+              required
+            ></input>
+            <br />
+            <button type="submit">Get in line</button>
+          </form>
+        </section>
+        <section className="queue">
+          <h2>The FIFO Queue</h2>
+          <div>{this.renderPeopleQueue()}</div>
+        </section>
         <section className="pet-queue">
           <div className="adopt-dog">
+            <h2>Meet {this.state.dogs[0].name}</h2>
             <img
               className="adoption-pic"
               src={this.state.dogs[0].imageURL}
               alt={this.state.dogs[0].description}
             ></img>
-            <h2>{this.state.dogs[0].name}</h2>
             <p>{this.state.dogs[0].age} years old</p>
             <p>Gender: {this.state.dogs[0].gender}</p>
             <p>Breed: {this.state.dogs[0].breed}</p>
@@ -181,13 +211,14 @@ export default class AdoptMain extends Component {
               </button>
             )}
           </div>
+          <hr />
           <div className="adopt-cat">
+            <h2>Meet {this.state.cats[0].name}!</h2>
             <img
               className="pet-img"
               src={this.state.cats[0].imageURL}
               alt={this.state.cats[0].description}
             ></img>
-            <h2>{this.state.cats[0].name}</h2>
             <p>{this.state.cats[0].age} years old</p>
             <p>Gender: {this.state.cats[0].gender}</p>
             <p>Breed: {this.state.cats[0].breed}</p>
@@ -199,23 +230,6 @@ export default class AdoptMain extends Component {
             )}
           </div>
         </section>
-
-        <section className="order">
-          <h2>Queue of people to adopt a pet</h2>
-          <div>{this.renderPeopleQueue()}</div>
-        </section>
-        <form className="add-to-list" onSubmit={(e) => this.handleAddToList(e)}>
-          <label htmlFor="name">Enter your name to get in line!</label>
-          <input
-            type="text"
-            name="name"
-            id="name-input"
-            onChange={this.handleChange}
-            value={this.state.name}
-            required
-          ></input>
-          <button type="submit">Get in line</button>
-        </form>
       </div>
     );
   }

@@ -7,19 +7,19 @@ img {
   width: 100%;
 }
 
-.about {
+.info {
   align-items: center;
   display: flex;
   flex-direction: column;
 }
 
-.about > h1 {
+.info > h1 {
   font-size: 45px;
   font-weight: 900;
   text-align: center;
 }
 
-.about > p {
+.info > p {
   text-align: center;
   padding: 0 15px;
 }

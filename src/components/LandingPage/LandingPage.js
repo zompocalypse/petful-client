@@ -5,8 +5,8 @@ import './LandingPage.css';
 export default class LandingPage extends React.Component {
   render() {
     return (
-      <div className="Landing">
-        <section className="about">
+      <div className="landing-page">
+        <section className="info">
           <h1>FIFO Petful Adoptions</h1>
           <img
             src="https://media.istockphoto.com/photos/young-dog-hugging-a-cat-as-friends-in-white-background-picture-id160389127"
