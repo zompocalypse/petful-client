@@ -218,6 +218,7 @@ export default class AdoptMain extends Component {
                 <p>How I got here: {this.state.dogs[0].story}</p>
                 {this.state.loggedInUser === this.state.people[0] && (
                   <button
+                    className="button"
                     type="button"
                     onClick={(e) => this.handleAdoption('dog')}
                   >
